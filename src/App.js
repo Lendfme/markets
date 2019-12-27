@@ -5,8 +5,7 @@ import './App.scss';
 
 import MyProgress from './component/progress';
 
-// let address_map = require('./abi/address_map.json');
-// let mMarket_abi = require('./abi/moneyMarket.json');
+
 import BTC from './images/BTC.svg';
 import imBTC from './images/imBTC.svg';
 import USDx from './images/USDx.svg';
@@ -40,13 +39,45 @@ export default class App extends React.Component {
       .then((data) => {
         if (data) {
           var obj_data = JSON.parse(data);
-          console.log(obj_data)
-          this.setState({ data: obj_data, data_is_ok: true })
+          console.log(obj_data);
+
+          this.setState({ data: obj_data, data_is_ok: true }, () => {
+            // return false;
+            var supply_array = this.state.data.markets;
+            var borrow_array = this.state.data.markets;
+
+            supply_array.sort(this.compare_supply);
+            borrow_array.sort(this.compare_borrow);
+
+            for (var i = 0; i < supply_array.length; i++) {
+              supply_array[i].persentage_supply = Number((supply_array[i].totalSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100).toFixed(1));
+            }
+            for (var j = 0; j < borrow_array.length; j++) {
+              borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100).toFixed(1));
+            }
+
+            this.setState({
+              supply_array: supply_array,
+              borrow_array: borrow_array,
+              array_is_ok: true
+            })
+
+            console.log(supply_array);
+            console.log(borrow_array);
+          })
         }
       })
 
   }
 
+
+  compare_supply = (val1, val2) => {
+    return val2.totalSupplyUSD - val1.totalSupplyUSD;
+  };
+
+  compare_borrow = (val1, val2) => {
+    return val2.totalBorrowUSD - val1.totalBorrowUSD;
+  };
 
   format_str_to_kmb = (str_num) => {
     var t_num = Number(str_num);
@@ -86,11 +117,9 @@ export default class App extends React.Component {
     return str_num;
   }
 
-
   format_str_to_persent = (str_num) => {
     return (Number(str_num) * 100).toFixed(2) + '%';
   }
-
 
   format_str_to_K = (str_num) => {
     var reg = /\d{1,3}(?=(\d{3})+$)/g;
@@ -157,16 +186,28 @@ export default class App extends React.Component {
           <div className='total-wrap-supply'>
             <h4>Total Supply</h4>
             <div style={{ width: '90%', margin: '0 auto' }}>
-              <MyProgress />
-              <MyProgress />
+              {
+                this.state.array_is_ok &&
+                this.state.supply_array.map(supply_item => {
+                  return (
+                    <MyProgress {...supply_item} key={supply_item.symbol} type={'supply'} />
+                  )
+                })
+              }
             </div>
           </div>
 
           <div className='total-wrap-borrow'>
             <h4>Total Borrow</h4>
             <div style={{ width: '90%', margin: '0 auto' }}>
-              <MyProgress />
-              <MyProgress />
+              {
+                this.state.array_is_ok &&
+                this.state.borrow_array.map(borrow_item => {
+                  return (
+                    <MyProgress {...borrow_item} key={borrow_item.symbol} type={'borrow'} />
+                  )
+                })
+              }
             </div>
           </div>
           <div className='clear'></div>

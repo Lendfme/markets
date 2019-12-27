@@ -4,22 +4,49 @@ import 'antd/dist/antd.css';
 import './progress.scss';
 
 import BTC from '../images/BTC.svg';
+import imBTC from '../images/imBTC.svg';
 import USDx from '../images/USDx.svg';
+import UUDD from '../images/UUDD.svg';
 import USDT from '../images/USDT.svg';
 import WETH from '../images/WETH.svg';
+import telegram from '../images/telegram.svg';
+import twitter from '../images/twitter.svg';
 
 
 export default class MyProgress extends React.Component {
+    constructor(porps) {
+        super(porps);
+
+        this.state = {
+            token: {
+                WETH: WETH,
+                UUDD: UUDD,
+                imBTC: imBTC,
+                USDT: USDT
+            }
+        }
+    }
+
+
     render() {
         return (
             <div className='persent-wrap'>
                 <div className='persent-top'>
-                    <img src={BTC} alt='' />
-                    <span className='token'>ETH</span>
-                    <span className='persent-num'>40.9%</span>
+                    <img src={this.state.token[this.props.symbol]} alt='' />
+                    <span className='token'>{this.props.symbol}</span>
+                    <span className='persent-num'>
+                        {
+                            this.props.type === 'supply' ?
+                                this.props.persentage_supply : this.props.persentage_borrow
+                        }
+                        %</span>
                 </div>
                 <div className='persent-bottom'>
-                    <Progress percent={50} status="active" showInfo={false} />
+                    <Progress
+                        percent={this.props.type === 'supply' ? this.props.persentage_supply : this.props.persentage_borrow}
+                        status="active"
+                        showInfo={false}
+                    />
                 </div>
             </div>
         )
