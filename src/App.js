@@ -8,7 +8,9 @@ import MyProgress from './component/progress';
 // let address_map = require('./abi/address_map.json');
 // let mMarket_abi = require('./abi/moneyMarket.json');
 import BTC from './images/BTC.svg';
+import imBTC from './images/imBTC.svg';
 import USDx from './images/USDx.svg';
+import UUDD from './images/UUDD.svg';
 import USDT from './images/USDT.svg';
 import WETH from './images/WETH.svg';
 import telegram from './images/telegram.svg';
@@ -22,24 +24,95 @@ export default class App extends React.Component {
   constructor(porps) {
     super(porps);
 
-    // this.new_web3 = window.new_web3 = new Web3(Web3.givenProvider || null);
-    // this.bn = this.new_web3.utils.toBN;
+    this.state = {
+      data_is_ok: false,
+      token: {
+        WETH: WETH,
+        UUDD: UUDD,
+        imBTC: imBTC,
+        USDT: USDT
+      }
+    }
 
-    // this.new_web3.eth.net.getNetworkType().then(
-    //   (net_type) => {
-    //     let mMarket = new this.new_web3.eth.Contract(mMarket_abi, address_map[net_type]['mMarket']);
-    //     this.setState({
-    //       net_type: net_type,
-    //       mMarket: mMarket
-    //     }, () => {
-    //       // this.state.mMarket.methods.markets().call().then(res_market => {
-    //       //   console.log(res_market);
-    //       // })
-    //     })
-    //   }
-    // )
+    this.markets_api = 'https://test.lendf.me/info?data=markets';
+    fetch(this.markets_api)
+      .then((res) => { return res.text() })
+      .then((data) => {
+        if (data) {
+          var obj_data = JSON.parse(data);
+          console.log(obj_data)
+          this.setState({ data: obj_data, data_is_ok: true })
+        }
+      })
 
   }
+
+
+  format_str_to_kmb = (str_num) => {
+    var t_num = Number(str_num);
+    var out_a, out_b, t_index;
+
+    if (t_num >= 1E9) {
+      out_a = Math.floor(t_num / 1E9);
+      if ((t_num % 1E9 / 1E9).toString().indexOf('.') > 0) {
+        t_index = (t_num % 1E9 / 1E9).toString().indexOf('.') + 1;
+        out_b = (t_num % 1E9 / 1E9).toString().substr(t_index, 2);
+      } else {
+        out_b = '00';
+      }
+      return out_a + '.' + out_b + 'G';
+    }
+    if (t_num >= 1E6) {
+      out_a = Math.floor(t_num / 1E6);
+      if ((t_num % 1E6 / 1E6).toString().indexOf('.') > 0) {
+        t_index = (t_num % 1E6 / 1E6).toString().indexOf('.') + 1;
+        out_b = (t_num % 1E6 / 1E6).toString().substr(t_index, 2);
+      } else {
+        out_b = '00';
+      }
+      return out_a + '.' + out_b + 'M';
+    }
+    if (t_num >= 1E3) {
+      out_a = Math.floor(t_num / 1E3);
+      if ((t_num % 1E3 / 1E3).toString().indexOf('.') > 0) {
+        t_index = (t_num % 1E3 / 1E3).toString().indexOf('.') + 1;
+        out_b = (t_num % 1E3 / 1E3).toString().substr(t_index, 2);
+      } else {
+        out_b = '00';
+      }
+      return out_a + '.' + out_b + 'K';
+    }
+
+    return str_num;
+  }
+
+
+  format_str_to_persent = (str_num) => {
+    return (Number(str_num) * 100).toFixed(2) + '%';
+  }
+
+
+  format_str_to_K = (str_num) => {
+    var reg = /\d{1,3}(?=(\d{3})+$)/g;
+
+    if (str_num.indexOf('.') > 0) {
+      str_num = str_num.slice(0, str_num.indexOf('.') + 3);
+    }
+
+    if (str_num.indexOf('.') > 0) {
+      var part_a = str_num.split('.')[0];
+      var part_b = str_num.split('.')[1];
+
+      part_a = (part_a + '').replace(reg, '$&,');
+
+      return part_a + '.' + part_b;
+    } else {
+      str_num = (str_num + '').replace(reg, '$&,');
+      return str_num;
+    }
+  }
+
+
 
   render() {
     return (
@@ -53,17 +126,23 @@ export default class App extends React.Component {
           <div className='header-con'>
             <div className='header-item supply-balance'>
               <span className='item-title'>Total Supply Balance</span>
-              <span className='item-num'>0.00</span>
+              <span className='item-num'>$
+                {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalSupplyBalanceUSD) : '0.00'}
+              </span>
             </div>
 
             <div className='header-item borrow-balance'>
               <span className='item-title'>Total Borrow Balance</span>
-              <span className='item-num item-num-borrow'>0.00</span>
+              <span className='item-num item-num-borrow'>$
+                {this.state.data_is_ok ? this.format_str_to_K(this.state.data.totalBorrowBalanceUSD) : '0.00'}
+              </span>
             </div>
 
             <div className='header-item collate-rate'>
               <span className='item-title'>Total Collateralization ratio</span>
-              <span className='item-num item-num-ratio'>0.00</span>
+              <span className='item-num item-num-ratio'>
+                {this.state.data_is_ok ? this.format_str_to_persent(this.state.data.totalCollateralizationRatio) : '...'}
+              </span>
             </div>
           </div>
         </div>
@@ -99,49 +178,32 @@ export default class App extends React.Component {
           <table>
             <thead>
               <tr>
-                <th className='th-1'>Market</th>
-                <th className='th-2'>Gross Supply</th>
-                <th className='th-3'>Supply APR</th>
-                <th className='th-4'>Gross Borrow</th>
-                <th className='th-5'>Borrow APR</th>
+                <th>Market</th>
+                <th>Gross Supply</th>
+                <th>Supply APR</th>
+                <th>Gross Borrow</th>
+                <th>Borrow APR</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className='td-1'>
-                  <img alt='' src={WETH} />
-                  <span className='token-name'>Ether</span>
-                  <span className='token-name-short'>ETH</span>
-                </td>
-                <td className='td-2'>$45.89M</td>
-                <td className='td-3'>0.05%</td>
-                <td className='td-4'>$45.89M</td>
-                <td className='td-5'>0.05%</td>
-              </tr>
-
-              <tr>
-                <td className='td-1'>
-                  <img alt='' src={USDx} />
-                  <span className='token-name'>dForce USD</span>
-                  <span className='token-name-short'>USDx</span>
-                </td>
-                <td className='td-2'>$45.89M</td>
-                <td className='td-3'>0.05%</td>
-                <td className='td-4'>$45.89M</td>
-                <td className='td-5'>0.05%</td>
-              </tr>
-
-              <tr>
-                <td className='td-1'>
-                  <img alt='' src={USDT} />
-                  <span className='token-name'>Tether USD</span>
-                  <span className='token-name-short'>USDT</span>
-                </td>
-                <td className='td-2'>$45.89M</td>
-                <td className='td-3'>0.05%</td>
-                <td className='td-4'>$45.89M</td>
-                <td className='td-5'>0.05%</td>
-              </tr>
+              {
+                this.state.data_is_ok &&
+                this.state.data.markets.map(item => {
+                  return (
+                    <tr key={item.asset}>
+                      <td>
+                        <img alt='' src={this.state.token[item.symbol]} />
+                        <span className='token-name'>{'to update...'}</span>
+                        <span className='token-name-short'>{item.symbol}</span>
+                      </td>
+                      <td>${this.format_str_to_kmb(item.totalSupplyUSD)}</td>
+                      <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                      <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                      <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
