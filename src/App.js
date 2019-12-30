@@ -14,6 +14,7 @@ import USDT from './images/USDT.svg';
 import WETH from './images/WETH.svg';
 import telegram from './images/telegram.svg';
 import twitter from './images/twitter.svg';
+import medium from './images/medium.svg';
 
 
 
@@ -33,7 +34,8 @@ export default class App extends React.Component {
       }
     }
 
-    this.markets_api = 'https://test.lendf.me/info?data=markets';
+    // this.markets_api = 'https://test.lendf.me/info?data=markets';
+    this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
     fetch(this.markets_api)
       .then((res) => { return res.text() })
       .then((data) => {
@@ -258,8 +260,9 @@ export default class App extends React.Component {
           </div>
 
           <div className='footer-right'>
-            <a href='www.abc.com' target='_blank'><img src={telegram} alt='' /></a>
-            <a href='www.abc.com' target='_blank'><img src={twitter} alt='' /></a>
+            <a href='https://twitter.com/LendfMe' target='_blank'><img src={twitter} alt='' /></a>
+            <a href='https://medium.com/dforcenet' target='_blank'><img src={medium} alt='' /></a>
+            <a href='https://t.me/dforcenet' target='_blank'><img src={telegram} alt='' /></a>
           </div>
           <div className='clear'></div>
         </div>
