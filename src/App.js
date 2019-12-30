@@ -30,7 +30,8 @@ export default class App extends React.Component {
         WETH: WETH,
         UUDD: UUDD,
         imBTC: imBTC,
-        USDT: USDT
+        USDT: USDT,
+        USDx: USDx
       }
     }
 
