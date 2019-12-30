@@ -22,7 +22,8 @@ export default class MyProgress extends React.Component {
                 WETH: WETH,
                 UUDD: UUDD,
                 imBTC: imBTC,
-                USDT: USDT
+                USDT: USDT,
+                USDx: USDx
             }
         }
     }

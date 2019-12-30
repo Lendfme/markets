@@ -1,10 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
-// import Web3 from 'web3';
+import _ from 'lodash';
 
 import MyProgress from './component/progress';
-
 
 import BTC from './images/BTC.svg';
 import imBTC from './images/imBTC.svg';
@@ -46,8 +45,8 @@ export default class App extends React.Component {
 
           this.setState({ data: obj_data, data_is_ok: true }, () => {
             // return false;
-            var supply_array = this.state.data.markets;
-            var borrow_array = this.state.data.markets;
+            var supply_array = _.cloneDeep(this.state.data.markets);
+            var borrow_array = _.cloneDeep(this.state.data.markets);
 
             supply_array.sort(this.compare_supply);
             borrow_array.sort(this.compare_borrow);
@@ -237,7 +236,7 @@ export default class App extends React.Component {
                     <tr key={item.asset}>
                       <td>
                         <img alt='' src={this.state.token[item.symbol]} />
-                        {/* <span className='token-name'>{item.name}</span> */}
+                        <span className='token-name'>{item.name}</span>
                         <span className='token-name-short'>{item.symbol}</span>
                       </td>
                       <td>${this.format_str_to_kmb(item.totalSupplyUSD)}</td>
