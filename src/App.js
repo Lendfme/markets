@@ -237,7 +237,7 @@ export default class App extends React.Component {
                     <tr key={item.asset}>
                       <td>
                         <img alt='' src={this.state.token[item.symbol]} />
-                        <span className='token-name'>{item.name}</span>
+                        {/* <span className='token-name'>{item.name}</span> */}
                         <span className='token-name-short'>{item.symbol}</span>
                       </td>
                       <td>${this.format_str_to_kmb(item.totalSupplyUSD)}</td>
