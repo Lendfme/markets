@@ -318,7 +318,7 @@ export default class App extends React.Component {
                   <a href='https://www.lendf.me/' target='_blank' rel="noopener noreferrer">Lendf.me</a>
                 </span>
                 <span className='content'>
-                  <a href='https://markets.lendf.me/' target='_blank' rel="noopener noreferrer">Markets</a>
+                  <a href='https://monitor.lendf.me/' target='_blank' rel="noopener noreferrer">Monitor</a>
                 </span>
               </div>
             </div>
