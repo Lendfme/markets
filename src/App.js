@@ -14,6 +14,7 @@ import WETH from './images/WETH.svg';
 import telegram from './images/telegram.svg';
 import twitter from './images/twitter.svg';
 import medium from './images/medium.svg';
+import up from './images/up.svg';
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from 'react-intl';
@@ -297,55 +298,63 @@ export default class App extends React.Component {
 
           <div className='footer'>
             <div className='footer-left'>
-              <a href='www.abc.com' target='_blank'>GitHub</a>
-              <a href='www.abc.com' target='_blank'>Docs</a>
-              <a href='www.abc.com' target='_blank'>FAQ</a>
+              <div className='footer-left-res'>
+                <span className='title'>
+                  <FormattedMessage id='Resource' />
+                </span>
+                <span className='content'>
+                  <a href='https://github.com/Lendfme/liquidator' target='_blank' rel="noopener noreferrer">GitHub</a>
+                </span>
+                <span className='content'>
+                  <a href='https://docs.lendf.me/faq' target='_blank' rel="noopener noreferrer">FAQ</a>
+                </span>
+              </div>
+
+              <div className='footer-left-pro'>
+                <span className='title'>
+                  <FormattedMessage id='Products' />
+                </span>
+                <span className='content'>
+                  <a href='https://www.lendf.me/' target='_blank' rel="noopener noreferrer">Lendf.me</a>
+                </span>
+                <span className='content'>
+                  <a href='https://markets.lendf.me/' target='_blank' rel="noopener noreferrer">Markets</a>
+                </span>
+              </div>
             </div>
 
             <div className='footer-right'>
-              <a
-                href='https://twitter.com/LendfMe'
-                target='_blank'
-                rel="noopener noreferrer"
-              ><img src={twitter} alt='' /></a>
+              <a href='https://twitter.com/LendfMe' target='_blank' rel="noopener noreferrer">
+                <img src={twitter} alt='' />
+              </a>
+              <a href='https://medium.com/dforcenet' target='_blank' rel="noopener noreferrer">
+                <img src={medium} alt='' />
+              </a>
+              <a href='https://t.me/dforcenet' target='_blank' rel="noopener noreferrer">
+                <img src={telegram} alt='' />
+              </a>
+              <div className='clear'></div>
 
-              <a
-                href='https://medium.com/dforcenet'
-                target='_blank'
-                rel="noopener noreferrer"
-              ><img src={medium} alt='' /></a>
-
-              <a
-                href='https://t.me/dforcenet'
-                target='_blank'
-                rel="noopener noreferrer"
-              ><img src={telegram} alt='' /></a>
-            </div>
-
-            <div className='footer-right'>
               <div className='footer-right-fixed'>
-                <button
-                  className='fixed1'
-                  onFocus={() => { this.setState({ show_language: true }) }}
-                // onBlur={() => { this.setState({ show_language: false }) }}
-                >
+                <div className='fixed1'>
                   {
                     this.state.cur_language
                   }
-                </button>
-                {
-                  this.state.show_language &&
-                  <div className='fixed2'>
-                    <ul>
-                      <li onClick={() => { this.setState({ show_language: false, cur_language: '中文' }) }}>{'中文'}</li>
-                      <li onClick={() => { this.setState({ show_language: false, cur_language: 'English' }) }}>{'English'}</li>
-                    </ul>
-                  </div>
-                }
+                </div>
+                <span className='fixed-img'>
+                  <img src={up} alt='' />
+                </span>
+                <div className='fixed2'>
+                  <ul>
+                    <li onClick={() => { this.setState({ cur_language: '中文' }) }}>{'中文'}</li>
+                    <li onClick={() => { this.setState({ cur_language: 'English' }) }}>{'English'}</li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div className='clear'></div>
           </div>
+
         </div>
       </IntlProvider>
     )
