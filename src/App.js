@@ -76,8 +76,9 @@ export default class App extends React.Component {
             }
             // console.log(last_supply_persentage/100)
             // console.log(last_borrow_persentage/100)
-            supply_array[supply_array.length - 1].persentage_supply = last_supply_persentage / 100;
-            borrow_array[borrow_array.length - 1].persentage_borrow = last_borrow_persentage / 100;
+            supply_array[supply_array.length - 1].persentage_supply = Number(last_supply_persentage / 100).toFixed(1);
+            borrow_array[borrow_array.length - 1].persentage_borrow = Number(last_borrow_persentage / 100).toFixed(1);
+            // console.log(Number(last_supply_persentage / 100))
 
             this.setState({
               supply_array: supply_array,
@@ -303,7 +304,7 @@ export default class App extends React.Component {
                   <FormattedMessage id='Resource' />
                 </span>
                 <span className='content'>
-                  <a href='https://github.com/Lendfme/liquidator' target='_blank' rel="noopener noreferrer">GitHub</a>
+                  <a href='https://github.com/Lendfme/markets' target='_blank' rel="noopener noreferrer">GitHub</a>
                 </span>
                 <span className='content'>
                   <a href='https://docs.lendf.me/faq' target='_blank' rel="noopener noreferrer">FAQ</a>
