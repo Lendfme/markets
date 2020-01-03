@@ -147,7 +147,12 @@ export default class App extends React.Component {
     var cpmp_str = str_num.replace(/\./, '');
     var res_str = cpmp_str.slice(0, index_num) + '.' + cpmp_str.substr(index_num, 2);
     // console.log(Number(res_str))
-    return Number(res_str) + '%';
+
+    if (Number(res_str) === 0) {
+      return '<0.01%'
+    } else {
+      return Number(res_str) + '%';
+    }
   }
 
   format_str_to_K = (str_num) => {
@@ -170,8 +175,13 @@ export default class App extends React.Component {
     }
   }
 
-  change_langulage = (e) => {
-    console.log(e.currentTarget.nodeName);
+  clickFAQ = () => {
+    // console.log('aaaaa');
+    if (navigator.language === 'zh-CN') {
+      window.open('https://docs.lendf.me/faqcn', '_blank');
+    } else {
+      window.open('https://docs.lendf.me/faq', '_blank');
+    }
   }
 
 
@@ -180,7 +190,9 @@ export default class App extends React.Component {
       <IntlProvider locale={'en'} messages={this.state.cur_language === '中文' ? zh_CN : en_US} >
         <div className="App">
           <div className="logo">
-            <img src={logo} alt='' />
+            <a href='https://www.lendf.me/' target='_blank' rel="noopener noreferrer">
+              <img src={logo} alt='' />
+            </a>
           </div>
 
 
@@ -307,7 +319,7 @@ export default class App extends React.Component {
                   <a href='https://github.com/Lendfme/markets' target='_blank' rel="noopener noreferrer">GitHub</a>
                 </span>
                 <span className='content'>
-                  <a href='https://docs.lendf.me/faq' target='_blank' rel="noopener noreferrer">FAQ</a>
+                  <a onClick={() => { this.clickFAQ() }}>FAQ</a>
                 </span>
               </div>
 

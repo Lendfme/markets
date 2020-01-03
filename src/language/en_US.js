@@ -10,6 +10,8 @@ const en_US = {
     Gross_Supply: 'Gross Supply',
     Supply_APR: 'Supply APR',
     Gross_Borrow: 'Gross Borrow',
-    Borrow_APR: 'Borrow APR'
+    Borrow_APR: 'Borrow APR',
+    Resource: 'Resource',
+    Products: 'Products'
 }
 export default en_US;

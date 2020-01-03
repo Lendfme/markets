@@ -10,6 +10,8 @@ const zh_CN = {
     Gross_Supply: '存款总额',
     Supply_APR: '存款利率',
     Gross_Borrow: '借款总额',
-    Borrow_APR: '借款利率'
+    Borrow_APR: '借款利率',
+    Resource: '资源',
+    Products: '产品'
 }
 export default zh_CN;
