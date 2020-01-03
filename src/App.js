@@ -315,10 +315,10 @@ export default class App extends React.Component {
                 <span className='title'>
                   <FormattedMessage id='Resource' />
                 </span>
-                <span className='content'>
+                <span className='content-new'>
                   <a href='https://github.com/Lendfme/markets' target='_blank' rel="noopener noreferrer">GitHub</a>
                 </span>
-                <span className='content'>
+                <span className='content-new'>
                   <a onClick={() => { this.clickFAQ() }}>FAQ</a>
                 </span>
               </div>
@@ -327,10 +327,10 @@ export default class App extends React.Component {
                 <span className='title'>
                   <FormattedMessage id='Products' />
                 </span>
-                <span className='content'>
+                <span className='content-new'>
                   <a href='https://www.lendf.me/' target='_blank' rel="noopener noreferrer">Lendf.me</a>
                 </span>
-                <span className='content'>
+                <span className='content-new'>
                   <a href='https://monitor.lendf.me/' target='_blank' rel="noopener noreferrer">Monitor</a>
                 </span>
               </div>
