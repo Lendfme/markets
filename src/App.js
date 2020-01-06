@@ -324,7 +324,7 @@ export default class App extends React.Component {
               </div>
 
               <div className='footer-left-pro'>
-                <span className='title'>
+                <span className='title mb10'>
                   <FormattedMessage id='Products' />
                 </span>
                 <span className='content-new'>

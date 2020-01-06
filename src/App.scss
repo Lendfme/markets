@@ -311,7 +311,7 @@
         float: right;
         width: 108px;
         cursor: pointer;
-        padding-top: 8px;
+        padding-top: 15px;
 
         &:hover .fixed2 {
           display: block;
@@ -512,7 +512,7 @@
             border-bottom: 1px solid #E9ECF0;
             text-align: right;
             padding-left: 5px;
-            line-height: 40px;
+            // line-height: 40px;
           }
 
           th:nth-child(1) {
@@ -620,6 +620,10 @@
     // background: red;
     padding-top: 15px;
     margin-bottom: 15px;
+
+    .mb10 {
+      margin-top: 10px;
+    }
 
     .footer-left {
       // float: left;
