@@ -278,15 +278,31 @@ export default class App extends React.Component {
             <table>
               <thead>
                 <tr>
-                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
-                    <span>
+                  <th>
+                    <span className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
                       <FormattedMessage id='Market' />
                     </span>
                   </th>
-                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Gross_Supply' /></th>
-                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Supply_APR' /></th>
-                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Gross_Borrow' /></th>
-                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Borrow_APR' /></th>
+                  <th>
+                    <span className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
+                      <FormattedMessage id='Gross_Supply' />
+                    </span>
+                  </th>
+                  <th>
+                    <span className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
+                      <FormattedMessage id='Supply_APR' />
+                    </span>
+                  </th>
+                  <th>
+                    <span className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
+                      <FormattedMessage id='Gross_Borrow' />
+                    </span>
+                  </th>
+                  <th>
+                    <span className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
+                      <FormattedMessage id='Borrow_APR' />
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
