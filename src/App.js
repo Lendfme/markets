@@ -278,11 +278,15 @@ export default class App extends React.Component {
             <table>
               <thead>
                 <tr>
-                  <th><FormattedMessage id='Market' /></th>
-                  <th><FormattedMessage id='Gross_Supply' /></th>
-                  <th><FormattedMessage id='Supply_APR' /></th>
-                  <th><FormattedMessage id='Gross_Borrow' /></th>
-                  <th><FormattedMessage id='Borrow_APR' /></th>
+                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}>
+                    <span>
+                      <FormattedMessage id='Market' />
+                    </span>
+                  </th>
+                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Gross_Supply' /></th>
+                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Supply_APR' /></th>
+                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Gross_Borrow' /></th>
+                  <th className={this.state.cur_language === 'English' ? 'linheight45' : 'linheight30'}><FormattedMessage id='Borrow_APR' /></th>
                 </tr>
               </thead>
               <tbody>

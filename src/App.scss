@@ -513,6 +513,26 @@
             text-align: right;
             padding-left: 5px;
             // line-height: 40px;
+            // line-height: 30px;
+
+            .linheight45 {
+              line-height: 45px;
+
+              span {
+                display: block;
+                height: 30px;
+                // background: red;
+              }
+            }
+
+            .linheight30 {
+
+              span {
+                display: block;
+                height: 30px;
+                line-height: 36px;
+              }
+            }
           }
 
           th:nth-child(1) {
