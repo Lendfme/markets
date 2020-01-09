@@ -138,6 +138,12 @@ export default class App extends React.Component {
       return out_a + '.' + out_b + 'K';
     }
 
+    if (str_num.indexOf('.') > 0) {
+      var aaa = str_num.split('.')[0];
+      var bbb = str_num.split('.')[1];
+      return str_num = aaa + '.' + bbb.substr(0, 2);
+    }
+
     return str_num;
   }
 
