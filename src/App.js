@@ -7,8 +7,8 @@ import MyProgress from './component/progress';
 
 import BTC from './images/BTC.svg';
 import imBTC from './images/imBTC.svg';
-import HUBTC from './images/HBTC.png';
-import HBTC from './images/HBTC.png';
+import HUBTC from './images/HBTC.svg';
+import HBTC from './images/HBTC.svg';
 import USDx from './images/USDx.svg';
 import UUDD from './images/UUDD.svg';
 import USDT from './images/USDT.svg';
