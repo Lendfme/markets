@@ -5,6 +5,8 @@ import './progress.scss';
 
 import BTC from '../images/BTC.svg';
 import imBTC from '../images/imBTC.svg';
+import HUBTC from '../images/HBTC.png';
+import HBTC from '../images/HBTC.png';
 import USDx from '../images/USDx.svg';
 import UUDD from '../images/UUDD.svg';
 import USDT from '../images/USDT.svg';
@@ -23,7 +25,9 @@ export default class MyProgress extends React.Component {
                 UUDD: UUDD,
                 imBTC: imBTC,
                 USDT: USDT,
-                USDx: USDx
+                USDx: USDx,
+                HBTC: HBTC,
+                HUBTC: HUBTC
             }
         }
     }

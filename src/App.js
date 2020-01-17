@@ -7,6 +7,8 @@ import MyProgress from './component/progress';
 
 import BTC from './images/BTC.svg';
 import imBTC from './images/imBTC.svg';
+import HUBTC from './images/HBTC.png';
+import HBTC from './images/HBTC.png';
 import USDx from './images/USDx.svg';
 import UUDD from './images/UUDD.svg';
 import USDT from './images/USDT.svg';
@@ -35,13 +37,18 @@ export default class App extends React.Component {
         UUDD: UUDD,
         imBTC: imBTC,
         USDT: USDT,
-        USDx: USDx
+        USDx: USDx,
+        HUBTC: HUBTC,
+        HBTC: HBTC
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English'
     }
 
-    // this.markets_api = 'https://test.lendf.me/info?data=markets';
-    this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
+    // test
+    this.markets_api = 'https://test.lendf.me/info?data=markets';
+
+    // 正式
+    // this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
     fetch(this.markets_api)
       .then((res) => { return res.text() })
       .then((data) => {
