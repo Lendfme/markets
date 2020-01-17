@@ -190,7 +190,7 @@ export default class App extends React.Component {
 
   clickFAQ = () => {
     // console.log('aaaaa');
-    if (navigator.language === 'zh-CN') {
+    if (this.state.cur_language === '中文') {
       window.open('https://docs.lendf.me/faqcn', '_blank');
     } else {
       window.open('https://docs.lendf.me/faq', '_blank');
