@@ -67,7 +67,7 @@ export default class App extends React.Component {
   }
 
   get_markets_data = () => {
-    console.log('get_markets_data: ', this.markets_api);
+    // console.log('get_markets_data: ', this.markets_api);
     fetch(this.markets_api)
       .then((res) => { return res.text() })
       .then((data) => {
