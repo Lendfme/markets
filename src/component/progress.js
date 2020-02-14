@@ -13,6 +13,11 @@ import USDT from '../images/USDT.svg';
 import WETH from '../images/WETH.svg';
 import telegram from '../images/telegram.svg';
 import twitter from '../images/twitter.svg';
+import UUTT from '../images/USDT.svg';
+// png
+import usdc from '../images/usdc.png';
+import tusd from '../images/tusd.png';
+import pax from '../images/pax.png';
 
 
 export default class MyProgress extends React.Component {
@@ -27,7 +32,12 @@ export default class MyProgress extends React.Component {
                 USDT: USDT,
                 USDx: USDx,
                 HBTC: HBTC,
-                HUBTC: HUBTC
+                HUBTC: HUBTC,
+                HBTC: HBTC,
+                USDC: usdc,
+                TUSD: tusd,
+                UUTT: UUTT,
+                PAX: pax
             }
         }
     }

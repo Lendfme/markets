@@ -17,6 +17,12 @@ import telegram from './images/telegram.svg';
 import twitter from './images/twitter.svg';
 import medium from './images/medium.svg';
 import up from './images/up.svg';
+import UUTT from './images/USDT.svg';
+// png
+import usdc from './images/usdc.png';
+import tusd from './images/tusd.png';
+import pax from './images/pax.png';
+
 
 // add i18n.
 import { IntlProvider, FormattedMessage } from 'react-intl';
@@ -39,7 +45,11 @@ export default class App extends React.Component {
         USDT: USDT,
         USDx: USDx,
         HUBTC: HUBTC,
-        HBTC: HBTC
+        HBTC: HBTC,
+        USDC: usdc,
+        TUSD: tusd,
+        UUTT: UUTT,
+        PAX: pax
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English'
     }
@@ -49,6 +59,15 @@ export default class App extends React.Component {
 
     // 正式
     // this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
+
+    this.timer = setInterval(() => {
+      this.get_markets_data();
+    }, 1000 * 15)
+
+  }
+
+  get_markets_data = () => {
+    console.log('get_markets_data: ', this.markets_api);
     fetch(this.markets_api)
       .then((res) => { return res.text() })
       .then((data) => {
@@ -86,6 +105,12 @@ export default class App extends React.Component {
             supply_array[supply_array.length - 1].persentage_supply = Number(last_supply_persentage / 100).toFixed(1);
             borrow_array[borrow_array.length - 1].persentage_borrow = Number(last_borrow_persentage / 100).toFixed(1);
             // console.log(Number(last_supply_persentage / 100))
+            if (borrow_array[borrow_array.length - 1].persentage_borrow <= 0) {
+              borrow_array[borrow_array.length - 1].persentage_borrow = Number(0).toFixed(1);
+            }
+            if (supply_array[supply_array.length - 1].persentage_supply <= 0) {
+              supply_array[supply_array.length - 1].persentage_supply = Number(0).toFixed(1);
+            }
 
             this.setState({
               supply_array: supply_array,
@@ -98,7 +123,6 @@ export default class App extends React.Component {
           })
         }
       })
-
   }
 
 
