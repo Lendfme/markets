@@ -60,6 +60,8 @@ export default class App extends React.Component {
     // 正式
     // this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
 
+    this.get_markets_data();
+
     this.timer = setInterval(() => {
       this.get_markets_data();
     }, 1000 * 15)
