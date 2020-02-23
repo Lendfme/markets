@@ -2,7 +2,7 @@
   clear: both;
 }
 
-
+// > 768
 @media screen and (min-width: 768px) {
   .logo {
     width: 820px;
@@ -94,6 +94,12 @@
       padding-left: 15px;
     }
 
+    .pro_wrap {
+      height: 370px;
+      // background: red;
+      overflow: auto;
+    }
+
     .total-wrap-supply,
     .total-wrap-borrow {
       float: left;
@@ -116,6 +122,13 @@
     box-shadow: 0px 0px 35px 0px rgba(94, 85, 126, 0.15);
     border-radius: 6px;
     margin-top: 20px;
+
+    .body-wrap {
+      width: 100%;
+      // background: red;
+      height: 356px;
+      overflow: auto;
+    }
 
     h5 {
       font-size: 20px;
@@ -166,6 +179,7 @@
           }
         }
       }
+
 
       tbody {
         tr {
@@ -468,6 +482,12 @@
       padding-left: 10px;
     }
 
+    .pro_wrap {
+      height: 310px;
+      // background: red;
+      overflow: auto;
+    }
+
     .total-wrap-supply,
     .total-wrap-borrow {
       // float: left;
@@ -490,6 +510,13 @@
     box-shadow: 0px 0px 35px 0px rgba(94, 85, 126, 0.15);
     border-radius: 3px;
     margin-top: 20px;
+
+    .body-wrap {
+      width: 100%;
+      // background: red;
+      height: 206px;
+      overflow: auto;
+    }
 
     h5 {
       font-size: 16px;

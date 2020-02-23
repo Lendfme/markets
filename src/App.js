@@ -18,6 +18,7 @@ import twitter from './images/twitter.svg';
 import medium from './images/medium.svg';
 import up from './images/up.svg';
 import UUTT from './images/USDT.svg';
+import WBTC from './images/WBTC.svg';
 // png
 import usdc from './images/usdc.png';
 import tusd from './images/tusd.png';
@@ -49,7 +50,8 @@ export default class App extends React.Component {
         USDC: usdc,
         TUSD: tusd,
         UUTT: UUTT,
-        PAX: pax
+        PAX: pax,
+        WBTC: WBTC
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English'
     }
@@ -279,7 +281,7 @@ export default class App extends React.Component {
               <h4>
                 <FormattedMessage id='Total_Supply' />
               </h4>
-              <div style={{ width: '90%', margin: '0 auto' }}>
+              <div className='pro_wrap' style={{ width: '100%', margin: '0 auto' }}>
                 {
                   this.state.array_is_ok &&
                   this.state.supply_array.map(supply_item => {
@@ -295,7 +297,7 @@ export default class App extends React.Component {
               <h4>
                 <FormattedMessage id='Total_Borrow' />
               </h4>
-              <div style={{ width: '90%', margin: '0 auto' }}>
+              <div className='pro_wrap' style={{ width: '100%', margin: '0 auto' }}>
                 {
                   this.state.array_is_ok &&
                   this.state.borrow_array.map(borrow_item => {
@@ -344,27 +346,31 @@ export default class App extends React.Component {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {
-                  this.state.data_is_ok &&
-                  this.state.data.markets.map(item => {
-                    return (
-                      <tr key={item.asset}>
-                        <td>
-                          <img alt='' src={this.state.token[item.symbol]} />
-                          <span className='token-name'>{item.name}</span>
-                          <span className='token-name-short'>{item.symbol}</span>
-                        </td>
-                        <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                        <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                        <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                        <td>{this.format_str_to_persent(item.borrowAPR)}</td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
             </table>
+            <div className='body-wrap'>
+              <table>
+                <tbody>
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data.markets.map(item => {
+                      return (
+                        <tr key={item.asset}>
+                          <td>
+                            <img alt='' src={this.state.token[item.symbol]} />
+                            <span className='token-name'>{item.name}</span>
+                            <span className='token-name-short'>{item.symbol}</span>
+                          </td>
+                          <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                          <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                          <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                          <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
           </div>
 
 
