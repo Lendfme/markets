@@ -88,33 +88,29 @@ export default class App extends React.Component {
             borrow_array.sort(this.compare_borrow);
 
             for (var i = 0; i < supply_array.length; i++) {
-              supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100).toFixed(1));
+              supply_array[i].persentage_supply = Number((supply_array[i].grossSupplyUSD / this.state.data.totalSupplyBalanceUSD * 100)).toFixed(1);
             }
             for (var j = 0; j < borrow_array.length; j++) {
-              borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100).toFixed(1));
+              borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
             }
 
-            var last_supply_persentage = 10000;
-            var last_borrow_persentage = 10000;
-            for (var x = 0; x < supply_array.length - 1; x++) {
-              // console.log(supply_array[x].persentage_supply);
-              last_supply_persentage = last_supply_persentage - supply_array[x].persentage_supply * 100;
-            }
-            for (var y = 0; y < borrow_array.length - 1; y++) {
-              // console.log(borrow_array[y].persentage_borrow);
-              last_borrow_persentage = last_borrow_persentage - borrow_array[y].persentage_borrow * 100;
-            }
-            // console.log(last_supply_persentage/100)
-            // console.log(last_borrow_persentage/100)
-            supply_array[supply_array.length - 1].persentage_supply = Number(last_supply_persentage / 100).toFixed(1);
-            borrow_array[borrow_array.length - 1].persentage_borrow = Number(last_borrow_persentage / 100).toFixed(1);
-            // console.log(Number(last_supply_persentage / 100))
-            if (borrow_array[borrow_array.length - 1].persentage_borrow <= 0) {
-              borrow_array[borrow_array.length - 1].persentage_borrow = Number(0).toFixed(1);
-            }
-            if (supply_array[supply_array.length - 1].persentage_supply <= 0) {
-              supply_array[supply_array.length - 1].persentage_supply = Number(0).toFixed(1);
-            }
+            // var last_supply_persentage = 10000;
+            // var last_borrow_persentage = 10000;
+            // for (var x = 0; x < supply_array.length - 1; x++) {
+            //   last_supply_persentage = last_supply_persentage - supply_array[x].persentage_supply * 100;
+            // }
+            // for (var y = 0; y < borrow_array.length - 1; y++) {
+            //   last_borrow_persentage = last_borrow_persentage - borrow_array[y].persentage_borrow * 100;
+            // }
+
+            // supply_array[supply_array.length - 1].persentage_supply = Number(last_supply_persentage / 100).toFixed(1);
+            // borrow_array[borrow_array.length - 1].persentage_borrow = Number(last_borrow_persentage / 100).toFixed(1);
+            // if (borrow_array[borrow_array.length - 1].persentage_borrow <= 0) {
+            //   borrow_array[borrow_array.length - 1].persentage_borrow = Number(0).toFixed(1);
+            // }
+            // if (supply_array[supply_array.length - 1].persentage_supply <= 0) {
+            //   supply_array[supply_array.length - 1].persentage_supply = Number(0).toFixed(1);
+            // }
 
             this.setState({
               supply_array: supply_array,

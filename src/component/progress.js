@@ -56,7 +56,8 @@ export default class MyProgress extends React.Component {
                             this.props.type === 'supply' ?
                                 this.props.persentage_supply : this.props.persentage_borrow
                         }
-                        %</span>
+                        %
+                    </span>
                 </div>
                 <div className='persent-bottom'>
                     <Progress
