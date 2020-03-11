@@ -15,6 +15,7 @@ import telegram from '../images/telegram.svg';
 import twitter from '../images/twitter.svg';
 import UUTT from '../images/USDT.svg';
 import WBTC from '../images/WBTC.svg';
+import DAI from '../images/DAI.svg';
 // png
 import usdc from '../images/usdc.png';
 import tusd from '../images/tusd.png';
@@ -39,7 +40,8 @@ export default class MyProgress extends React.Component {
                 TUSD: tusd,
                 UUTT: UUTT,
                 PAX: pax,
-                WBTC: WBTC
+                WBTC: WBTC,
+                DAI: DAI
             }
         }
     }

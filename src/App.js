@@ -19,6 +19,7 @@ import medium from './images/medium.svg';
 import up from './images/up.svg';
 import UUTT from './images/USDT.svg';
 import WBTC from './images/WBTC.svg';
+import DAI from './images/DAI.svg';
 // png
 import usdc from './images/usdc.png';
 import tusd from './images/tusd.png';
@@ -51,13 +52,30 @@ export default class App extends React.Component {
         TUSD: tusd,
         UUTT: UUTT,
         PAX: pax,
-        WBTC: WBTC
+        WBTC: WBTC,
+        DAI: DAI
       },
-      cur_language: navigator.language === 'zh-CN' ? '中文' : 'English'
+      cur_language: navigator.language === 'zh-CN' ? '中文' : 'English',
+      arr_token: [
+        "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E", // usdx
+        "0xaa74B62f737bbA1D2E520F9ec38Fc23b6E6817df", // usdt
+        "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980", // dai
+        "0xb2F74419E49dc9536D8662b3671eB2E334442F3d", // weth
+        "0x7A967421410019044aA829746D65575325082e99", // weth
+        "0x5Dc95A046020880b93F15902540Dbfe86489FddA", // imbtc
+        "0x7b054eBe1D7e003afdA8e717DAEaB05D56D5836A",// imbtc
+        "0xcf07906CbCF9824D0caE475E8F958d48AcF1014C", // hbtc
+        "0x84e96bb630a711d66789AcaBc237c087D8B371D3", // USDC
+        "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // usdc
+        "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55", // pax
+        "0xe72a3181f69Eb21A19bd4Ce19Eb68FDb333d74c6",// tusd
+        "0x7B65B937A0f3764a7a5e29fD696C391233218E91", // wbtc
+      ]
     }
 
     // test
-    this.markets_api = 'https://test.lendf.me/info?data=markets';
+    // this.markets_api = 'https://test.lendf.me/info?data=markets';
+    this.markets_api = 'https://test.lendf.me/v1/info?data=markets';
 
     // 正式
     // this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
@@ -71,7 +89,6 @@ export default class App extends React.Component {
   }
 
   get_markets_data = () => {
-    // console.log('get_markets_data: ', this.markets_api);
     fetch(this.markets_api)
       .then((res) => { return res.text() })
       .then((data) => {
@@ -79,10 +96,21 @@ export default class App extends React.Component {
           var obj_data = JSON.parse(data);
           console.log(obj_data);
 
-          this.setState({ data: obj_data, data_is_ok: true }, () => {
-            // return false;
-            var supply_array = _.cloneDeep(this.state.data.markets);
-            var borrow_array = _.cloneDeep(this.state.data.markets);
+          var arr_markets = [];
+          var key_arr = Object.keys(obj_data.markets);
+          for (var i = 0; i < key_arr.length; i++) {
+            arr_markets.push(obj_data.markets[key_arr[i]])
+          }
+          console.log(arr_markets);
+          // return;
+
+          this.setState({
+            data: obj_data,
+            data_is_ok: true,
+            data_markets: arr_markets
+          }, () => {
+            var supply_array = _.cloneDeep(this.state.data_markets);
+            var borrow_array = _.cloneDeep(this.state.data_markets);
 
             supply_array.sort(this.compare_supply);
             borrow_array.sort(this.compare_borrow);
@@ -94,32 +122,13 @@ export default class App extends React.Component {
               borrow_array[j].persentage_borrow = Number((borrow_array[j].totalBorrowUSD / this.state.data.totalBorrowBalanceUSD * 100)).toFixed(1);
             }
 
-            // var last_supply_persentage = 10000;
-            // var last_borrow_persentage = 10000;
-            // for (var x = 0; x < supply_array.length - 1; x++) {
-            //   last_supply_persentage = last_supply_persentage - supply_array[x].persentage_supply * 100;
-            // }
-            // for (var y = 0; y < borrow_array.length - 1; y++) {
-            //   last_borrow_persentage = last_borrow_persentage - borrow_array[y].persentage_borrow * 100;
-            // }
-
-            // supply_array[supply_array.length - 1].persentage_supply = Number(last_supply_persentage / 100).toFixed(1);
-            // borrow_array[borrow_array.length - 1].persentage_borrow = Number(last_borrow_persentage / 100).toFixed(1);
-            // if (borrow_array[borrow_array.length - 1].persentage_borrow <= 0) {
-            //   borrow_array[borrow_array.length - 1].persentage_borrow = Number(0).toFixed(1);
-            // }
-            // if (supply_array[supply_array.length - 1].persentage_supply <= 0) {
-            //   supply_array[supply_array.length - 1].persentage_supply = Number(0).toFixed(1);
-            // }
-
             this.setState({
               supply_array: supply_array,
               borrow_array: borrow_array,
               array_is_ok: true
             })
-
-            console.log(supply_array);
-            console.log(borrow_array);
+            // console.log(supply_array);
+            // console.log(borrow_array);
           })
         }
       })
@@ -348,20 +357,274 @@ export default class App extends React.Component {
                 <tbody>
                   {
                     this.state.data_is_ok &&
-                    this.state.data.markets.map(item => {
-                      return (
-                        <tr key={item.asset}>
-                          <td>
-                            <img alt='' src={this.state.token[item.symbol]} />
-                            <span className='token-name'>{item.name}</span>
-                            <span className='token-name-short'>{item.symbol}</span>
-                          </td>
-                          <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
-                          <td>{this.format_str_to_persent(item.supplyAPR)}</td>
-                          <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
-                          <td>{this.format_str_to_persent(item.borrowAPR)}</td>
-                        </tr>
-                      )
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[0]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[1]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[2]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[3]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[4]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[5]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[6]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[7]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[8]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[9]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[10]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[11]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset === this.state.arr_token[12]) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
                     })
                   }
                 </tbody>
