@@ -74,11 +74,10 @@ export default class App extends React.Component {
     }
 
     // test
-    // this.markets_api = 'https://test.lendf.me/info?data=markets';
-    this.markets_api = 'https://test.lendf.me/v1/info?data=markets';
+    this.markets_api = 'https://test.lendf.me/v2/info?data=markets';
 
-    // 正式
-    // this.markets_api = 'https://api.lendf.me/v1/info?data=markets';
+    // product
+    // this.markets_api = 'https://api.lendf.me/v2/info?data=markets';
 
     this.get_markets_data();
 
