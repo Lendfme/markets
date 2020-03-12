@@ -57,27 +57,27 @@ export default class App extends React.Component {
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English',
       arr_token: [
-        "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E", // usdx
-        "0xaa74B62f737bbA1D2E520F9ec38Fc23b6E6817df", // usdt
-        "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980", // dai
+        "0xeb269732ab75A6fD61Ea60b06fE994cD32a83549", // usdx
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7", // usdt
+        "0x06AF07097C9Eeb7fD685c692751D5C66dB49c215", // dai
         // "0xb2F74419E49dc9536D8662b3671eB2E334442F3d", // weth
-        "0x7A967421410019044aA829746D65575325082e99", // weth
-        "0x5Dc95A046020880b93F15902540Dbfe86489FddA", // imbtc
+        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // weth
+        "0x3212b29E33587A00FB1C83346f5dBFA69A458923", // imbtc
         // "0x7b054eBe1D7e003afdA8e717DAEaB05D56D5836A",// imbtc
-        "0xcf07906CbCF9824D0caE475E8F958d48AcF1014C", // hbtc
+        "0x0316eb71485b0ab14103307bf65a021042c6d380", // hbtc
         // "0x84e96bb630a711d66789AcaBc237c087D8B371D3", // USDC
-        "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // usdc
-        "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55", // pax
-        "0xe72a3181f69Eb21A19bd4Ce19Eb68FDb333d74c6",// tusd
-        "0x7B65B937A0f3764a7a5e29fD696C391233218E91", // wbtc
+        "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // usdc
+        "0x8E870D67F660D95d5be530380D0eC0bd388289E1", // pax
+        "0x0000000000085d4780B73119b644AE5ecd22b376",// tusd
+        "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", // wbtc
       ]
     }
 
     // test
-    this.markets_api = 'https://test.lendf.me/v2/info?data=markets';
+    // this.markets_api = 'https://test.lendf.me/v2/info?data=markets';
 
     // product
-    // this.markets_api = 'https://api.lendf.me/v2/info?data=markets';
+    this.markets_api = 'https://api.lendf.me/v2/info?data=markets';
 
     this.get_markets_data();
 
