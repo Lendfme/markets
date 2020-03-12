@@ -156,7 +156,7 @@
           }
 
           th:nth-child(1) {
-            width: 24%;
+            width: 26%;
             text-align: left;
             padding-right: 0px;
             padding-left: 15px;
@@ -167,7 +167,7 @@
           }
 
           th:nth-child(3) {
-            width: 19%;
+            width: 17%;
           }
 
           th:nth-child(4) {
@@ -190,11 +190,12 @@
             padding-right: 20px;
 
             &:nth-child(1) {
-              width: 24%;
+              width: 28%;
               text-align: left;
               padding-right: 0px;
               padding-left: 15px;
               position: relative;
+              // background: red;
 
               img {
                 position: absolute;
@@ -204,6 +205,7 @@
               }
 
               .token-name {
+                // background: green;
                 position: absolute;
                 font-size: 10px;
                 font-weight: 400;
@@ -232,7 +234,7 @@
             }
 
             &:nth-child(3) {
-              width: 19%;
+              width: 15%;
               font-size: 18px;
               font-weight: 400;
               color: rgba(67, 73, 118, 1);
