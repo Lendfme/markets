@@ -357,7 +357,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[0]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[0].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -378,7 +378,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[1]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[1].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -399,7 +399,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[2]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[2].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -420,7 +420,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[3]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[3].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -441,7 +441,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[4]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[4].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -462,7 +462,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[5]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[5].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -483,7 +483,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[6]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[6].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -504,7 +504,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[7]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[7].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -525,7 +525,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[8]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[8].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
@@ -546,7 +546,7 @@ export default class App extends React.Component {
                   {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
-                      if (item.asset === this.state.arr_token[9]) {
+                      if (item.asset.toLowerCase() === this.state.arr_token[9].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
