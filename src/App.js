@@ -20,6 +20,7 @@ import up from './images/up.svg';
 import UUTT from './images/USDT.svg';
 import WBTC from './images/WBTC.svg';
 import DAI from './images/DAI.svg';
+import HUSD from './images/HUSD.svg';
 // png
 import usdc from './images/usdc.png';
 import tusd from './images/tusd.png';
@@ -53,19 +54,18 @@ export default class App extends React.Component {
         UUTT: UUTT,
         PAX: pax,
         WBTC: WBTC,
-        DAI: DAI
+        DAI: DAI,
+        HUSD: HUSD
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English',
       arr_token: [
         "0xD96cC7f80C1cb595eBcdC072531e1799B3a2436E", // usdx
         "0xaa74B62f737bbA1D2E520F9ec38Fc23b6E6817df", // usdt
         "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980", // dai
-        // "0xb2F74419E49dc9536D8662b3671eB2E334442F3d", // weth
+        "0x0D518472330FF1D943881BBBDda03b221A7F9F74", // husd
         "0x7A967421410019044aA829746D65575325082e99", // weth
         "0x5Dc95A046020880b93F15902540Dbfe86489FddA", // imbtc
-        // "0x7b054eBe1D7e003afdA8e717DAEaB05D56D5836A",// imbtc
         "0xcf07906CbCF9824D0caE475E8F958d48AcF1014C", // hbtc
-        // "0x84e96bb630a711d66789AcaBc237c087D8B371D3", // USDC
         "0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b", // usdc
         "0x722E6238335d89393A42e2cA316A5fb1b8B2EB55", // pax
         "0xe72a3181f69Eb21A19bd4Ce19Eb68FDb333d74c6",// tusd
@@ -547,6 +547,27 @@ export default class App extends React.Component {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
                       if (item.asset.toLowerCase() === this.state.arr_token[9].toLowerCase()) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset.toLowerCase() === this.state.arr_token[10].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
