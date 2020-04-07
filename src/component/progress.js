@@ -17,6 +17,7 @@ import UUTT from '../images/USDT.svg';
 import WBTC from '../images/WBTC.svg';
 import DAI from '../images/DAI.svg';
 import HUSD from '../images/HUSD.svg';
+import BUSD from '../images/BUSD.svg';
 // png
 import usdc from '../images/usdc.png';
 import tusd from '../images/tusd.png';
@@ -43,7 +44,8 @@ export default class MyProgress extends React.Component {
                 PAX: pax,
                 WBTC: WBTC,
                 DAI: DAI,
-                HUSD: HUSD
+                HUSD: HUSD,
+                BUSD: BUSD
             }
         }
     }

@@ -21,6 +21,7 @@ import UUTT from './images/USDT.svg';
 import WBTC from './images/WBTC.svg';
 import DAI from './images/DAI.svg';
 import HUSD from './images/HUSD.svg';
+import BUSD from './images/BUSD.svg';
 // png
 import usdc from './images/usdc.png';
 import tusd from './images/tusd.png';
@@ -55,7 +56,8 @@ export default class App extends React.Component {
         PAX: pax,
         WBTC: WBTC,
         DAI: DAI,
-        HUSD: HUSD
+        HUSD: HUSD,
+        BUSD: BUSD
       },
       cur_language: navigator.language === 'zh-CN' ? '中文' : 'English',
       arr_token: [
@@ -63,6 +65,7 @@ export default class App extends React.Component {
         "0xaa74B62f737bbA1D2E520F9ec38Fc23b6E6817df", // usdt
         "0x8a5C1BD4D75e168a4f65eB902c289400B90FD980", // dai
         "0x0D518472330FF1D943881BBBDda03b221A7F9F74", // husd
+        "0xBB4EeFbE28440D27D18e4269962bE2506366c476", // busd
         "0x7A967421410019044aA829746D65575325082e99", // weth
         "0x5Dc95A046020880b93F15902540Dbfe86489FddA", // imbtc
         "0xcf07906CbCF9824D0caE475E8F958d48AcF1014C", // hbtc
@@ -568,6 +571,27 @@ export default class App extends React.Component {
                     this.state.data_is_ok &&
                     this.state.data_markets.map(item => {
                       if (item.asset.toLowerCase() === this.state.arr_token[10].toLowerCase()) {
+                        return (
+                          <tr key={item.asset}>
+                            <td>
+                              <img alt='' src={this.state.token[item.symbol]} />
+                              <span className='token-name'>{item.name}</span>
+                              <span className='token-name-short'>{item.symbol}</span>
+                            </td>
+                            <td>${this.format_str_to_kmb(item.grossSupplyUSD)}</td>
+                            <td>{this.format_str_to_persent(item.supplyAPR)}</td>
+                            <td>${this.format_str_to_kmb(item.totalBorrowUSD)}</td>
+                            <td>{this.format_str_to_persent(item.borrowAPR)}</td>
+                          </tr>
+                        )
+                      }
+                    })
+                  }
+
+                  {
+                    this.state.data_is_ok &&
+                    this.state.data_markets.map(item => {
+                      if (item.asset.toLowerCase() === this.state.arr_token[11].toLowerCase()) {
                         return (
                           <tr key={item.asset}>
                             <td>
